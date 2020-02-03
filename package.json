@@ -8,9 +8,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cookie-parser": "1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "helmet": "^3.21.2",
     "http-errors": "~1.6.3",
     "install": "^0.13.0",
     "mysql": "github:mysqljs/mysql",
