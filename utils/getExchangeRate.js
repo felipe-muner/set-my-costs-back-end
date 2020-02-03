@@ -1,6 +1,7 @@
 require("dotenv").config();
 const axios = require("axios");
 const mysql = require("mysql");
+const conn = require(process.env.PWD + '/utils/conn')
 
 axios
   .get(
@@ -12,7 +13,7 @@ axios
 
     let ratesInUSD = Object.keys(response.data.rates).map(key => [
       key,
-      response.data.rates[key]
+      response.data.rates[key] / response.data.rates.USD
     ]);
 
     ratesInUSD.push(["EUR", 1 / response.data.rates.USD]);
@@ -20,15 +21,6 @@ axios
     ratesInUSD.map(el => el.unshift(response.data.date));
 
     ratesInUSD[0][2] = 1;
-
-    const conn = mysql.createConnection({
-      host: "localhost",
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_DTBS
-    });
-
-    conn.connect();
 
     let sql =
       "INSERT INTO ExchangeRate (RegisterDate, CurrencyName, Rate) VALUES ?";
@@ -41,7 +33,6 @@ axios
       console.log(ratesInUSD);
       conn.end();
     });
-    // conn.end();
   })
   .catch(error => {
     console.log(error);
