@@ -5,7 +5,7 @@ const er = require(process.env.PWD + '/models/ExchangeRate')
 
 /* GET home page. */
 router.get("/", er.getAll, (req, res, next) => {
-  res.json({ rates: req.exchangeRate });
+  res.json( req.exchangeRate );
 });
 
 module.exports = router;
