@@ -1,4 +1,4 @@
-const conn = require(process.env.PWD + '/utils/conn')
+const conn = require('../utils/conn')
 
 module.exports = {
   getAll: function(req, res, next) {
